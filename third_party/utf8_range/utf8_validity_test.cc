@@ -1,3 +1,5 @@
+//go:build deps_only && cgo
+
 #include "utf8_validity.h"
 
 #include <gtest/gtest.h>

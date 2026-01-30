@@ -1,3 +1,5 @@
+//go:build deps_only && cgo
+
 #include <sys/time.h>
 
 #include <algorithm>

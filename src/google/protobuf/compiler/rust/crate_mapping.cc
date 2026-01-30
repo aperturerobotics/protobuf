@@ -1,3 +1,5 @@
+//go:build deps_only && cgo
+
 #include "google/protobuf/compiler/rust/crate_mapping.h"
 
 #include <fcntl.h>

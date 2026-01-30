@@ -1,3 +1,5 @@
+//go:build deps_only && cgo
+
 // Adapted from https://github.com/lemire/fastvalidate-utf-8
 
 #ifdef __x86_64__

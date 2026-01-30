@@ -1,3 +1,5 @@
+//go:build deps_only && cgo
+
 #include "google/protobuf/compiler/kotlin/field.h"
 
 #include <string>

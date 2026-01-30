@@ -1,3 +1,5 @@
+//go:build deps_only && cgo
+
 #include "google/protobuf/compiler/cpp/tools/analyze_profile_proto.h"
 
 #include <sstream>

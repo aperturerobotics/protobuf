@@ -1,3 +1,5 @@
+//go:build deps_only && cgo
+
 #include "google/protobuf/compiler/plugin.h"
 #include "google/protobuf/compiler/python/generator.h"
 

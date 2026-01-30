@@ -1,3 +1,5 @@
+//go:build deps_only && cgo
+
 #ifndef GOOGLE_PROTOBUF_COMPILER_JAVA_FIELD_COMMON_H__
 #define GOOGLE_PROTOBUF_COMPILER_JAVA_FIELD_COMMON_H__
 

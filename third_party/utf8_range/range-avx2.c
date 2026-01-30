@@ -1,3 +1,5 @@
+//go:build deps_only && cgo
+
 #ifdef __AVX2__
 
 #include <stdio.h>

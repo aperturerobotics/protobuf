@@ -1,3 +1,5 @@
+//go:build deps_only && cgo
+
 #include <boost/locale.hpp>
 
 using namespace std;

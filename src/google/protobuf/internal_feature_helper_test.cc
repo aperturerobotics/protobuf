@@ -1,3 +1,5 @@
+//go:build deps_only && cgo
+
 #include "google/protobuf/internal_feature_helper.h"
 
 #include <cstdint>

@@ -1,3 +1,5 @@
+//go:build deps_only && cgo
+
 #include "google/protobuf/compiler/rust/rust_field_type.h"
 
 #include "absl/log/absl_log.h"

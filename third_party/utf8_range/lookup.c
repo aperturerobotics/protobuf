@@ -1,3 +1,5 @@
+//go:build deps_only && cgo
+
 #include <stdio.h>
 
 /* http://bjoern.hoehrmann.de/utf-8/decoder/dfa */

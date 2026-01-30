@@ -1,3 +1,5 @@
+//go:build deps_only && cgo
+
 #ifdef __aarch64__
 
 #include <stdio.h>

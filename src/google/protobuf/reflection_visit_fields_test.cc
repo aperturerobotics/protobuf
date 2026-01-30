@@ -1,3 +1,5 @@
+//go:build deps_only && cgo
+
 #include "google/protobuf/reflection_visit_fields.h"
 
 #include <cstddef>

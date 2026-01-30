@@ -1,3 +1,5 @@
+//go:build deps_only && cgo
+
 #include "google/protobuf/compiler/java/field_common.h"
 
 #include <cstddef>

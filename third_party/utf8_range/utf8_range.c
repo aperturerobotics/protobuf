@@ -1,3 +1,5 @@
+//go:build deps_only && cgo
+
 // Copyright 2023 Google LLC
 //
 // Use of this source code is governed by an MIT-style

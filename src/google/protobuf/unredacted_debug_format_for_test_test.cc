@@ -1,3 +1,5 @@
+//go:build deps_only && cgo
+
 #include "google/protobuf/unredacted_debug_format_for_test.h"
 
 #include <gmock/gmock.h>

@@ -1,3 +1,5 @@
+//go:build deps_only && cgo
+
 #include <emmintrin.h>
 #include <smmintrin.h>
 #include <tmmintrin.h>

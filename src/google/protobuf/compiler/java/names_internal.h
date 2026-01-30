@@ -1,3 +1,5 @@
+//go:build deps_only && cgo
+
 // Protocol Buffers - Google's data interchange format
 // Copyright 2025 Google Inc.  All rights reserved.
 //

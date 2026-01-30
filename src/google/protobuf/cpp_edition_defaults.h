@@ -1,3 +1,5 @@
+//go:build deps_only && cgo
+
 #ifndef GOOGLE_PROTOBUF_CPP_EDITION_DEFAULTS_H__
 #define GOOGLE_PROTOBUF_CPP_EDITION_DEFAULTS_H__
 

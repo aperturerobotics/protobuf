@@ -1,3 +1,5 @@
+//go:build deps_only && cgo
+
 #ifndef GOOGLE_PROTOBUF_COMPILER_KOTLIN_FIELD_H__
 #define GOOGLE_PROTOBUF_COMPILER_KOTLIN_FIELD_H__
 

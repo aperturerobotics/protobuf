@@ -1,3 +1,5 @@
+//go:build deps_only && cgo
+
 namespace google {
 namespace protobuf {
 namespace internal {

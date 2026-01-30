@@ -1,3 +1,5 @@
+//go:build deps_only && cgo
+
 #ifndef GOOGLE_PROTOBUF_REFLECTION_VISIT_FIELDS_H__
 #define GOOGLE_PROTOBUF_REFLECTION_VISIT_FIELDS_H__
 

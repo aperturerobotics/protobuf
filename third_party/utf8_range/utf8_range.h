@@ -1,3 +1,5 @@
+//go:build deps_only && cgo
+
 #ifndef THIRD_PARTY_UTF8_RANGE_UTF8_RANGE_H_
 #define THIRD_PARTY_UTF8_RANGE_UTF8_RANGE_H_
 

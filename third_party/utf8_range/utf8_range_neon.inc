@@ -1,3 +1,5 @@
+//go:build deps_only && cgo
+
 #include <arm_neon.h>
 
 /* This code is almost the same as SSE implementation, please reference
