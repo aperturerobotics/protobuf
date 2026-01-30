@@ -1,3 +1,5 @@
+//go:build deps_only && cgo
+
 #include "google/protobuf/compiler/java/generator.h"
 #include "google/protobuf/compiler/plugin.h"
 

@@ -1,3 +1,5 @@
+//go:build deps_only && cgo
+
 #include <string>
 #include <utility>
 #include <vector>

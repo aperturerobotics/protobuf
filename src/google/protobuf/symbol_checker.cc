@@ -1,3 +1,5 @@
+//go:build deps_only && cgo
+
 #include "google/protobuf/symbol_checker.h"
 
 #include <string>
@@ -5,6 +7,7 @@
 
 #include "absl/strings/str_cat.h"
 #include "google/protobuf/descriptor.h"
+
 #include "google/protobuf/descriptor.pb.h"
 #include "google/protobuf/descriptor_visitor.h"
 

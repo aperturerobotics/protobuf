@@ -1,3 +1,5 @@
+//go:build deps_only && cgo
+
 #ifndef GOOGLE_PROTOBUF_INTERNAL_FEATURE_HELPER_H__
 #define GOOGLE_PROTOBUF_INTERNAL_FEATURE_HELPER_H__
 
@@ -5,6 +7,7 @@
 
 #include "absl/strings/string_view.h"
 #include "google/protobuf/descriptor.h"
+
 #include "google/protobuf/descriptor.pb.h"
 #include "google/protobuf/extension_set.h"
 

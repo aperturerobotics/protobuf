@@ -1,3 +1,5 @@
+//go:build deps_only && cgo
+
 #include "google/protobuf/compiler/cpp/message_layout_helper.h"
 
 #include <algorithm>

@@ -1,3 +1,5 @@
+//go:build deps_only && cgo
+
 #ifndef GOOGLE_PROTOBUF_INTERNAL_METADATA_LOCATOR_H__
 #define GOOGLE_PROTOBUF_INTERNAL_METADATA_LOCATOR_H__
 
@@ -5,6 +7,7 @@
 #include <cstdint>
 #include <limits>
 #include <type_traits>
+
 
 #include "absl/log/absl_check.h"
 #include "google/protobuf/arena.h"

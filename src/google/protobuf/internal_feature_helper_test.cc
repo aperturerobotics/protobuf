@@ -1,3 +1,5 @@
+//go:build deps_only && cgo
+
 #include "google/protobuf/internal_feature_helper.h"
 
 #include <cstdint>
@@ -5,6 +7,7 @@
 #include "google/protobuf/descriptor.pb.h"
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
+
 #include "absl/log/absl_check.h"
 #include "absl/log/absl_log.h"
 #include "absl/strings/str_format.h"

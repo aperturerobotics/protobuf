@@ -1,3 +1,5 @@
+//go:build deps_only && cgo
+
 #include "google/protobuf/compiler/cpp/field_chunk.h"
 
 #include <algorithm>

@@ -1,3 +1,5 @@
+//go:build deps_only && cgo
+
 #ifndef GOOGLE_PROTOBUF_DESCRIPTOR_LEGACY_H__
 #define GOOGLE_PROTOBUF_DESCRIPTOR_LEGACY_H__
 
@@ -5,6 +7,7 @@
 #include "google/protobuf/descriptor.pb.h"
 
 // Must be included last.
+
 #include "google/protobuf/port_def.inc"
 
 namespace google {

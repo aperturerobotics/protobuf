@@ -1,3 +1,5 @@
+//go:build deps_only && cgo
+
 #include "google/protobuf/internal_metadata_locator.h"
 
 #include <cstddef>
@@ -5,6 +7,7 @@
 #include <utility>
 
 #include <gtest/gtest.h>
+
 #include "google/protobuf/arena.h"
 #include "google/protobuf/internal_metadata_locator_test.pb.h"
 #include "google/protobuf/io/coded_stream.h"

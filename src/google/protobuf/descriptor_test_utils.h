@@ -1,3 +1,5 @@
+//go:build deps_only && cgo
+
 // Protocol Buffers - Google's data interchange format
 // Copyright 2025 Google Inc.  All rights reserved.
 //
@@ -5,6 +7,7 @@
 // license that can be found in the LICENSE file or at
 // https://developers.google.com/open-source/licenses/bsd
 //
+
 #ifndef GOOGLE_PROTOBUF_DESCRIPTOR_TEST_UTILS_H__
 #define GOOGLE_PROTOBUF_DESCRIPTOR_TEST_UTILS_H__
 

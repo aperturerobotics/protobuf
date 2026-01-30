@@ -1,3 +1,5 @@
+//go:build deps_only && cgo
+
 // Protocol Buffers - Google's data interchange format
 // Copyright 2008 Google Inc.  All rights reserved.
 //
@@ -5,6 +7,7 @@
 // license that can be found in the LICENSE file or at
 // https://developers.google.com/open-source/licenses/bsd
 //
+
 // This file contains definitions for the descriptors, so they can be used
 // without importing descriptor.h inside the lite runtime.
 // Users should include the public APIs in `descriptor.h`.

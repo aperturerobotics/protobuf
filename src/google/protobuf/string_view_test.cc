@@ -1,3 +1,5 @@
+//go:build deps_only && cgo
+
 #include <string>
 #include <type_traits>
 #include <utility>
@@ -5,6 +7,7 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 // clang-format off
+
 #include "absl/strings/string_view.h"
 // clang-format on
 #include "google/protobuf/descriptor.h"

@@ -1,9 +1,12 @@
+//go:build deps_only && cgo
+
 #ifndef GOOGLE_PROTOBUF_REFLECTION_VISIT_FIELDS_H__
 #define GOOGLE_PROTOBUF_REFLECTION_VISIT_FIELDS_H__
 
 #include <cstdint>
 #include <string>
 #include <utility>
+
 
 #include "absl/base/attributes.h"
 #include "absl/base/optimization.h"

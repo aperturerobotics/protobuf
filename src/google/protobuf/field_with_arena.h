@@ -1,3 +1,5 @@
+//go:build deps_only && cgo
+
 #ifndef GOOGLE_PROTOBUF_FIELD_WITH_ARENA_H__
 #define GOOGLE_PROTOBUF_FIELD_WITH_ARENA_H__
 
@@ -5,6 +7,7 @@
 
 #include "absl/log/absl_check.h"
 #include "google/protobuf/arena.h"
+
 #include "google/protobuf/internal_metadata_locator.h"
 #include "google/protobuf/internal_visibility.h"
 #include "google/protobuf/metadata_lite.h"

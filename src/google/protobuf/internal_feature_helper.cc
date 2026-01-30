@@ -1,3 +1,5 @@
+//go:build deps_only && cgo
+
 #include "google/protobuf/internal_feature_helper.h"
 
 #include <string>
@@ -5,6 +7,7 @@
 #include "absl/log/absl_check.h"
 #include "absl/strings/escaping.h"
 #include "absl/strings/string_view.h"
+
 #include "google/protobuf/descriptor.h"
 #include "google/protobuf/descriptor.pb.h"
 #include "google/protobuf/extension_set.h"

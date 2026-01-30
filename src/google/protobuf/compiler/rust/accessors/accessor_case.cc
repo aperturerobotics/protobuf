@@ -1,3 +1,5 @@
+//go:build deps_only && cgo
+
 #include "google/protobuf/compiler/rust/accessors/accessor_case.h"
 
 #include "absl/strings/string_view.h"

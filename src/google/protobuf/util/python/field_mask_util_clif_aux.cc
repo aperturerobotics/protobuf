@@ -1,3 +1,5 @@
+//go:build deps_only && cgo
+
 #include "google/protobuf/util/python/field_mask_util_clif_aux.h"
 
 #include <Python.h>

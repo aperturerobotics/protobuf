@@ -1,3 +1,5 @@
+//go:build deps_only && cgo
+
 // Protocol Buffers - Google's data interchange format
 // Copyright 2023 Google Inc.  All rights reserved.
 //
@@ -5,6 +7,7 @@
 // license that can be found in the LICENSE file or at
 // https://developers.google.com/open-source/licenses/bsd
 //
+
 // This header provides support for a per thread 'reflection mode'.
 //
 // Some protocol buffer optimizations use interceptors to determine which

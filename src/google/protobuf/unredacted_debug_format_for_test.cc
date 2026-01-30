@@ -1,3 +1,5 @@
+//go:build deps_only && cgo
+
 #include "google/protobuf/unredacted_debug_format_for_test.h"
 
 #include <string>
@@ -5,6 +7,7 @@
 #include "absl/log/absl_check.h"
 #include "google/protobuf/message.h"
 #include "google/protobuf/message_lite.h"
+
 #include "google/protobuf/text_format.h"
 
 namespace google {

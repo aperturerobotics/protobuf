@@ -1,3 +1,5 @@
+//go:build deps_only && cgo
+
 #ifndef GOOGLE_PROTOBUF_REFLECTION_VISIT_FIELD_INFO_H__
 #define GOOGLE_PROTOBUF_REFLECTION_VISIT_FIELD_INFO_H__
 
@@ -5,6 +7,7 @@
 #include <cstdint>
 #include <iterator>
 #include <string>
+
 #include <type_traits>
 #include <utility>
 

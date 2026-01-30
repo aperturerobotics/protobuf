@@ -1,3 +1,5 @@
+//go:build deps_only && cgo
+
 #include "google/protobuf/reflection_visit_fields.h"
 
 #include <cstddef>
@@ -5,6 +7,7 @@
 #include <string>
 #include <utility>
 #include <vector>
+
 
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>

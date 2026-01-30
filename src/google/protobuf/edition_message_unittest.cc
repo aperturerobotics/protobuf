@@ -1,3 +1,5 @@
+//go:build deps_only && cgo
+
 // Protocol Buffers - Google's data interchange format
 // Copyright 2008 Google Inc.  All rights reserved.
 //
@@ -5,6 +7,7 @@
 // license that can be found in the LICENSE file or at
 // https://developers.google.com/open-source/licenses/bsd
 //
+
 // This test is meant to verify the interaction of the most common and
 // representative edition features. Each new edition feature must have its own
 // unit test and we'll selectively accept new features when we believe doing so

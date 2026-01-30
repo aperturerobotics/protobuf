@@ -1,9 +1,12 @@
+//go:build deps_only && cgo
+
 #include "google/protobuf/unredacted_debug_format_for_test.h"
 
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 #include "google/protobuf/unittest.pb.h"
 #include "google/protobuf/unittest_lite.pb.h"
+
 
 namespace {
 

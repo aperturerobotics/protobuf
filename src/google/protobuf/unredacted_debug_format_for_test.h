@@ -1,3 +1,5 @@
+//go:build deps_only && cgo
+
 #ifndef GOOGLE_PROTOBUF_UNREDACTED_DEBUG_FORMAT_FOR_TEST_H__
 #define GOOGLE_PROTOBUF_UNREDACTED_DEBUG_FORMAT_FOR_TEST_H__
 
@@ -5,6 +7,7 @@
 #include "google/protobuf/message_lite.h"
 
 namespace google {
+
 namespace protobuf {
 namespace util {
 

@@ -1,3 +1,5 @@
+//go:build deps_only && cgo
+
 #include "google/protobuf/field_with_arena.h"
 
 #include <string>
@@ -5,6 +7,7 @@
 
 #include <gtest/gtest.h>
 #include "google/protobuf/arena.h"
+
 #include "google/protobuf/internal_metadata_locator.h"
 
 namespace google {
