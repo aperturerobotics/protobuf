@@ -10,4 +10,6 @@ import "embed"
 //go:embed util/*.cc util/*.h
 //go:embed json/*.cc json/*.h
 //go:embed json/internal/*.cc json/internal/*.h
+//go:embed compiler/*.cc compiler/*.h
+//go:embed compiler/*/*.cc compiler/*/*.h
 var Source embed.FS
