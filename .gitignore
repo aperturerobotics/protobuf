@@ -220,3 +220,8 @@ compile_commands.json
 
 # Ignore Bzlmod lock file until it is more stable
 MODULE.bazel.lock
+
+# WASI build directories
+/build-wasi/
+/build-abseil-wasi/
+/build-abseil-wasi-install/

@@ -346,6 +346,68 @@ if (protobuf_BUILD_EXAMPLES)
   include(${protobuf_SOURCE_DIR}/cmake/examples.cmake)
 endif (protobuf_BUILD_EXAMPLES)
 
+# WASI Reactor Build
+option(protobuf_BUILD_WASI_REACTOR "Build protoc as a WASI reactor module" OFF)
+
+if(CMAKE_SYSTEM_NAME STREQUAL "WASI" AND protobuf_BUILD_WASI_REACTOR)
+  message(STATUS "Building protoc WASI reactor module")
+
+  # Collect libprotoc sources, excluding:
+  # - subprocess.cc (we use subprocess_wasi.cc instead)
+  # - All generators except C++ (other languages use plugins)
+  # - upb_generator/ (not needed)
+  set(libprotoc_wasi_srcs ${libprotoc_srcs})
+  list(FILTER libprotoc_wasi_srcs EXCLUDE REGEX "subprocess\\.cc$")
+  list(FILTER libprotoc_wasi_srcs EXCLUDE REGEX "/java/")
+  list(FILTER libprotoc_wasi_srcs EXCLUDE REGEX "/kotlin/")
+  list(FILTER libprotoc_wasi_srcs EXCLUDE REGEX "/python/")
+  list(FILTER libprotoc_wasi_srcs EXCLUDE REGEX "/php/")
+  list(FILTER libprotoc_wasi_srcs EXCLUDE REGEX "/ruby/")
+  list(FILTER libprotoc_wasi_srcs EXCLUDE REGEX "/csharp/")
+  list(FILTER libprotoc_wasi_srcs EXCLUDE REGEX "/objectivec/")
+  list(FILTER libprotoc_wasi_srcs EXCLUDE REGEX "/rust/")
+  list(FILTER libprotoc_wasi_srcs EXCLUDE REGEX "upb_generator/")
+  list(APPEND libprotoc_wasi_srcs
+    ${protobuf_SOURCE_DIR}/src/google/protobuf/compiler/subprocess_wasi.cc
+    ${protobuf_SOURCE_DIR}/src/google/protobuf/compiler/wasi_stubs.cc
+  )
+
+  # Create static library for WASI (no shared libs in WASI)
+  add_library(libprotoc_wasi STATIC
+    ${libprotoc_wasi_srcs}
+    ${libprotoc_hdrs})
+  target_link_libraries(libprotoc_wasi PRIVATE libprotobuf)
+  target_link_libraries(libprotoc_wasi PUBLIC ${protobuf_ABSL_USED_TARGETS})
+  target_include_directories(libprotoc_wasi PUBLIC
+    ${protobuf_SOURCE_DIR}/src
+    ${protobuf_BINARY_DIR}/src)
+
+  # Create the WASI reactor executable
+  add_executable(protoc_wasi
+    ${protobuf_SOURCE_DIR}/src/google/protobuf/compiler/protoc_wasi_reactor.cc)
+
+  target_link_libraries(protoc_wasi
+    libprotoc_wasi
+    libprotobuf
+    ${protobuf_ABSL_USED_TARGETS})
+
+  # WASI reactor linker flags
+  target_link_options(protoc_wasi PRIVATE
+    -mexec-model=reactor
+    -Wl,--export-dynamic
+    -Wl,--export=malloc
+    -Wl,--export=free
+    -Wl,--export=realloc
+    -Wl,--export=calloc
+    -Wl,--export=protoc_init
+    -Wl,--export=protoc_run
+    -Wl,--export=protoc_destroy)
+
+  set_target_properties(protoc_wasi PROPERTIES
+    OUTPUT_NAME "protoc"
+    SUFFIX ".wasm")
+endif()
+
 if(protobuf_VERBOSE)
   message(STATUS "Protocol Buffers Configuring done")
 endif(protobuf_VERBOSE)

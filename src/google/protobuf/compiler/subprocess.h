@@ -73,6 +73,17 @@ class PROTOC_EXPORT Subprocess {
   HANDLE child_stdin_;
   HANDLE child_stdout_;
 
+#elif defined(__wasi__)
+  // WASI uses host-imported functions for subprocess communication.
+  // We store the program and search mode from Start() to use in Communicate().
+  std::string program_;
+  SearchMode search_mode_;
+
+  // Unused but kept for source compatibility
+  int child_pid_;
+  int child_stdin_;
+  int child_stdout_;
+
 #else  // _WIN32
   pid_t child_pid_;
 
