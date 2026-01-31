@@ -36,9 +36,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Compiler flags
 # Enable signal emulation for WASI (required by abseil debugging code)
-set(CMAKE_C_FLAGS_INIT "-fno-exceptions -D_WASI_EMULATED_SIGNAL")
-set(CMAKE_CXX_FLAGS_INIT "-fno-exceptions -fno-rtti -D_WASI_EMULATED_SIGNAL")
-set(CMAKE_EXE_LINKER_FLAGS_INIT "-lwasi-emulated-signal")
+# Use -Oz for minimum size, -flto for link-time optimization
+set(CMAKE_C_FLAGS_INIT "-Oz -flto -fno-exceptions -D_WASI_EMULATED_SIGNAL -DNDEBUG")
+set(CMAKE_CXX_FLAGS_INIT "-Oz -flto -fno-exceptions -fno-rtti -D_WASI_EMULATED_SIGNAL -DNDEBUG")
+set(CMAKE_EXE_LINKER_FLAGS_INIT "-Oz -flto -lwasi-emulated-signal -Wl,--gc-sections -Wl,--strip-all")
 
 # Define to disable plugin support (subprocess fork/exec not available in WASI)
 add_compile_definitions(PROTOBUF_DISABLE_PLUGINS=1)
