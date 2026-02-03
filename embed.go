@@ -8,4 +8,5 @@ import "embed"
 //go:embed CMakeLists.txt
 //go:embed cmake/*.cmake
 //go:embed src/file_lists.cmake
+//go:embed src/*.map
 var CMakeFiles embed.FS
