@@ -1,96 +1,56 @@
-// Stub implementations for Abseil threading symbols not available in WASI.
-// WASI is single-threaded, so these are no-ops or minimal implementations.
+// Copyright 2026 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     https://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
-#include <cstddef>
-#include <cstdlib>
+// WASI reactors are single-threaded. Abseil omits these synchronization
+// definitions when mmap-backed LowLevelAlloc is unavailable, but protobuf still
+// references them through absl::Mutex. The uncontended reactor path only needs
+// one correctly aligned identity and nonblocking semaphore operations.
+
+#include "absl/base/config.h"
+#include "absl/base/internal/thread_identity.h"
+#include "absl/synchronization/internal/create_thread_identity.h"
+#include "absl/synchronization/internal/kernel_timeout.h"
+#include "absl/synchronization/internal/per_thread_sem.h"
 
 extern "C" {
 
-// Per-thread semaphore stubs (single-threaded, so these are no-ops)
-void AbslInternalPerThreadSemWait(void* /*waiter*/, void* /*how_long*/) {
-  // No-op: single-threaded environment
+void ABSL_INTERNAL_C_SYMBOL(AbslInternalPerThreadSemInit)(
+    absl::base_internal::ThreadIdentity* /*identity*/) {}
+
+void ABSL_INTERNAL_C_SYMBOL(AbslInternalPerThreadSemPost)(
+    absl::base_internal::ThreadIdentity* /*identity*/) {}
+
+bool ABSL_INTERNAL_C_SYMBOL(AbslInternalPerThreadSemWait)(
+    absl::synchronization_internal::KernelTimeout /*timeout*/) {
+  return true;
 }
 
-void AbslInternalPerThreadSemPost(void* /*waiter*/) {
-  // No-op: single-threaded environment
-}
+void ABSL_INTERNAL_C_SYMBOL(AbslInternalPerThreadSemPoke)(
+    absl::base_internal::ThreadIdentity* /*identity*/) {}
 
 }  // extern "C"
 
 namespace absl {
+ABSL_NAMESPACE_BEGIN
 namespace synchronization_internal {
 
-// Thread identity stub - in single-threaded WASI, we use a static identity
-struct ThreadIdentity {
-  void* per_thread_synch;
-  void* waited;
-  int ticker;
-  int wait_start;
-  bool is_idle;
-};
-
-static ThreadIdentity g_single_thread_identity = {};
-
-void* CreateThreadIdentity() {
-  return &g_single_thread_identity;
+base_internal::ThreadIdentity* CreateThreadIdentity() {
+  alignas(base_internal::PerThreadSynch::kAlignment)
+      static base_internal::ThreadIdentity identity = {};
+  return &identity;
 }
 
 }  // namespace synchronization_internal
-
-namespace base_internal {
-
-// LowLevelAlloc stubs - use standard malloc/free
-// In WASI, we don't need the arena-based allocation since there's no signal handling
-
-struct LowLevelAllocArena {};
-
-void LowLevelAllocFree(void* p) {
-  std::free(p);
-}
-
-void* LowLevelAllocSigSafeArena() {
-  return nullptr;  // No signal-safe arena needed in WASI
-}
-
-void LowLevelAllocInitSigSafeArena() {
-  // No-op
-}
-
-void* LowLevelAllocAllocWithArena(size_t size, void* /*arena*/) {
-  return std::malloc(size);
-}
-
-}  // namespace base_internal
-}  // namespace absl
-
-// C++ mangled name stubs that match what the linker expects
-// These are the actual symbols that are undefined
-
-namespace absl {
-namespace base_internal {
-
-class LowLevelAlloc {
- public:
-  struct Arena;
-  static void Free(void* p);
-  static void* AllocWithArena(std::size_t request, Arena* arena);
-};
-
-void LowLevelAlloc::Free(void* p) {
-  std::free(p);
-}
-
-void* LowLevelAlloc::AllocWithArena(std::size_t request, Arena* /*arena*/) {
-  return std::malloc(request);
-}
-
-void InitSigSafeArena() {
-  // No-op
-}
-
-void* SigSafeArena() {
-  return nullptr;
-}
-
-}  // namespace base_internal
+ABSL_NAMESPACE_END
 }  // namespace absl

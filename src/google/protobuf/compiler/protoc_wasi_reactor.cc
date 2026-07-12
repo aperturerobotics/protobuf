@@ -8,14 +8,14 @@
 // WASI reactor entry point for protoc.
 // This file provides exported functions for running protoc as a WASI reactor,
 // allowing multiple compilations per instance without reloading the module.
-//
-// Only the C++ generator is included. Other languages use plugins.
 
 #include <cstdlib>
 
 #include "absl/log/initialize.h"
 #include "google/protobuf/compiler/command_line_interface.h"
 #include "google/protobuf/compiler/cpp/generator.h"
+#include "google/protobuf/compiler/csharp/csharp_generator.h"
+#include "google/protobuf/compiler/python/generator.h"
 
 // Must be included last.
 #include "google/protobuf/port_def.inc"
@@ -25,15 +25,16 @@ namespace {
 // Global CLI instance for the reactor
 google::protobuf::compiler::CommandLineInterface* g_cli = nullptr;
 
-// C++ generator (the only built-in generator included)
+// Built-in generators owned by the reactor.
 google::protobuf::compiler::cpp::CppGenerator* g_cpp_generator = nullptr;
+google::protobuf::compiler::csharp::Generator* g_csharp_generator = nullptr;
+google::protobuf::compiler::python::Generator* g_python_generator = nullptr;
 
 }  // namespace
 
 extern "C" {
 
-// Initialize the protoc reactor.
-// Creates the CLI instance and registers the C++ generator.
+// Initialize the protoc reactor and register the built-in generators.
 // Returns 0 on success, non-zero on error.
 __attribute__((export_name("protoc_init")))
 int protoc_init() {
@@ -51,6 +52,14 @@ int protoc_init() {
   g_cpp_generator = new google::protobuf::compiler::cpp::CppGenerator();
   g_cli->RegisterGenerator("--cpp_out", "--cpp_opt", g_cpp_generator,
                            "Generate C++ header and source.");
+
+  g_csharp_generator = new google::protobuf::compiler::csharp::Generator();
+  g_cli->RegisterGenerator("--csharp_out", "--csharp_opt", g_csharp_generator,
+                           "Generate C# source file.");
+
+  g_python_generator = new google::protobuf::compiler::python::Generator();
+  g_cli->RegisterGenerator("--python_out", "--python_opt", g_python_generator,
+                           "Generate Python source file.");
 
   return 0;
 }
@@ -74,6 +83,12 @@ void protoc_destroy() {
 
   delete g_cpp_generator;
   g_cpp_generator = nullptr;
+
+  delete g_csharp_generator;
+  g_csharp_generator = nullptr;
+
+  delete g_python_generator;
+  g_python_generator = nullptr;
 }
 
 }  // extern "C"
