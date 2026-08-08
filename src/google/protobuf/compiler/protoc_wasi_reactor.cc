@@ -16,6 +16,7 @@
 #include "google/protobuf/compiler/cpp/generator.h"
 #include "google/protobuf/compiler/csharp/csharp_generator.h"
 #include "google/protobuf/compiler/python/generator.h"
+#include "google/protobuf/compiler/python/pyi_generator.h"
 
 // Must be included last.
 #include "google/protobuf/port_def.inc"
@@ -29,6 +30,7 @@ google::protobuf::compiler::CommandLineInterface* g_cli = nullptr;
 google::protobuf::compiler::cpp::CppGenerator* g_cpp_generator = nullptr;
 google::protobuf::compiler::csharp::Generator* g_csharp_generator = nullptr;
 google::protobuf::compiler::python::Generator* g_python_generator = nullptr;
+google::protobuf::compiler::python::PyiGenerator* g_pyi_generator = nullptr;
 
 }  // namespace
 
@@ -61,6 +63,10 @@ int protoc_init() {
   g_cli->RegisterGenerator("--python_out", "--python_opt", g_python_generator,
                            "Generate Python source file.");
 
+  g_pyi_generator = new google::protobuf::compiler::python::PyiGenerator();
+  g_cli->RegisterGenerator("--pyi_out", "--pyi_opt", g_pyi_generator,
+                           "Generate Python typing stub file.");
+
   return 0;
 }
 
@@ -89,6 +95,9 @@ void protoc_destroy() {
 
   delete g_python_generator;
   g_python_generator = nullptr;
+
+  delete g_pyi_generator;
+  g_pyi_generator = nullptr;
 }
 
 }  // extern "C"
